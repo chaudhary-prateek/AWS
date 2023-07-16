@@ -1,0 +1,3 @@
+x = list(input("Enter the numbers you check"))
+l = [x**2 for x in range(len(x)) if (x%2==1)]
+print(l) 
