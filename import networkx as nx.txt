@@ -1,0 +1,55 @@
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+    def add_child(self, child):
+        self.children.append(child)
+
+def depth_limited_search(node, target, depth_limit):
+    return dls_recursive(node, target, depth_limit)
+
+def dls_recursive(node, target, depth_limit):
+    if depth_limit == 0 and node.data != target:
+        return None
+    elif node.data == target:
+        return node
+    elif depth_limit > 0:
+        for child in node.children:
+            result = dls_recursive(child, target, depth_limit - 1)
+            if result:
+                return result
+    return None
+
+# Example usage
+# Constructing a simple tree
+#         A
+#       / | \
+#      B  C  D
+#     / \    |
+#    E   F   G
+#   /
+#  H
+root = Node('A')
+b = Node('B')
+c = Node('C')
+d = Node('D')
+e = Node('E')
+f = Node('F')
+g = Node('G')
+h = Node('H')
+root.add_child(b)
+root.add_child(c)
+root.add_child(d)
+b.add_child(e)
+b.add_child(f)
+d.add_child(g)
+e.add_child(h)
+
+# target_node = depth_limited_search(root, 'H', 3)
+target_node = depth_limited_search(root, 'E', 1)
+if target_node:
+    print("Node found:", target_node.data)
+else:
+    print("Node not found within depth limit.")
